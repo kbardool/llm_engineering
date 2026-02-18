@@ -178,7 +178,8 @@ class Tester:
         # Title with final stats
         final_mean = running_means[-1]
         final_ci = ci[-1]
-        title = f"{self.title} Error: ${final_mean:,.2f} ± ${final_ci:,.2f}"
+        print(final_ci)
+        title = f"{self.title}  \${final_mean:,.2f} Error: ± ${final_ci:.2f}"
 
         fig.update_layout(
             title=title,
@@ -196,8 +197,8 @@ class Tester:
         average_error = sum(self.errors) / self.size
         mse = mean_squared_error(self.truths, self.guesses)
         r2 = r2_score(self.truths, self.guesses) * 100
-        title = f"{self.title} results<br><b>Error:</b> ${average_error:,.2f} <b>MSE:</b> {mse:,.0f} <b>r²:</b> {r2:.1f}%"
         self.error_trend_chart()
+        title = f"{self.title} results<br><b>Error:</b> ${average_error:,.2f} <b>MSE:</b> {mse:,.0f} <b>r²:</b> {r2:.1f}%"
         self.chart(title)
 
     def run(self):
