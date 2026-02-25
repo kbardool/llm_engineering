@@ -30,3 +30,12 @@ def hello_europe() -> str:
     data = response.json()
     city, region, country = data["city"], data["region"], data["country"]
     return f"Hello from {city}, {region}, {country}!!"
+
+@app.function(image=image, region="westus3")
+def hello_westusa() -> str:
+    import requests
+
+    response = requests.get("https://ipinfo.io/json")
+    data = response.json()
+    city, region, country = data["city"], data["region"], data["country"]
+    return f"Hello from {city}, {region}, {country}!!"  

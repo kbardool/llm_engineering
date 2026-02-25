@@ -30,7 +30,8 @@ class Preprocessor:
         self.base_url = base_url
         if "ollama" in model_name and not base_url:
             self.base_url = "http://localhost:11434"
-
+        print(f"Initialized Preprocessor with model {model_name} and reasoning effort {reasoning_effort} Base URL: {self.base_url}")
+        
     def messages_for(self, text: str) -> list[dict]:
         return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": text}]
 

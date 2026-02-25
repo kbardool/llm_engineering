@@ -64,6 +64,7 @@ Y_MEAN = 4.434937953948975
 
 class DeepNeuralNetworkInference:
     def __init__(self):
+        print(f" DeepNeuralNetworkInference setup")
         self.vectorizer = None
         self.model = None
         self.device = None
@@ -77,17 +78,20 @@ class DeepNeuralNetworkInference:
         self.model = DeepNeuralNetwork(5000)
         if torch.cuda.is_available():
             self.device = torch.device("cuda")
+            print(f" cuda is available")
         elif torch.backends.mps.is_available():
             self.device = torch.device("mps")
+            print(f" mps is available")
         else:
             self.device = torch.device("cpu")
+            print(f" cpu is available")
 
         logging.info(f"Neural Network is using {self.device}")
 
         self.model.to(self.device)
 
     def load(self, path):
-        self.model.load_state_dict(torch.load(path))
+        self.model.load_state_dict(torch.load(path, map_location="cpu"))
         self.model.to(self.device)
 
     def inference(self, text):
